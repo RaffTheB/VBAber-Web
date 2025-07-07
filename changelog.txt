@@ -1,14 +1,10 @@
-VBAber Web v8
+VBAber Web v9
 ======================
-🧠 Parser logico VBA
-✔ Controllo automatico di coerenza per:
-  - If / End If
-  - For / Next
-  - While / Wend
-  - Do / Loop
-  - Select Case / End Select
-  - With / End With
-✔ Avvisi in tempo reale sopra l'editor
-✔ Indicazione visiva di errori o assenza di errori
+🎨 Restyling grafico completo
+✔ Tema moderno ispirato a Microsoft Office
+✔ Font professionale e leggibile (Consolas, Segoe UI)
+✔ Pulsanti, dropdown e layout più eleganti
+✔ Tema chiaro e scuro migliorati
+✔ Più spazio visivo per il codice
 
-✅ Mantiene tutte le funzioni delle versioni precedenti
+✅ Nessuna funzione rimossa rispetto alla v8
