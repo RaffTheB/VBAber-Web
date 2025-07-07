@@ -1,0 +1,7 @@
+VBAber Web v5
+======================
+✔ Moduli multipli per progetto (supporto per più .bas/.cls)
+✔ Selezione e creazione moduli da menu a tendina
+✔ Salvataggio automatico per modulo
+✔ Esportazione singolo modulo
+✔ Mantiene evidenziazione sintattica avanzata

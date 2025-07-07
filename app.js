@@ -3,6 +3,7 @@ const editor = document.getElementById("editor");
 const highlighter = document.getElementById("highlighting");
 const themeSelector = document.getElementById("themeSelector");
 const projectSelector = document.getElementById("projectSelector");
+const moduleSelector = document.getElementById("moduleSelector");
 
 const KEYWORDS = [
   "Sub", "End Sub", "Function", "End Function", "Dim", "Set", "If", "Then", "Else", "End If",
@@ -13,25 +14,23 @@ const KEYWORDS = [
 ];
 
 let currentProject = "Progetto1";
+let currentModule = "Modulo1";
 let projects = JSON.parse(localStorage.getItem("vbaber-projects") || "{}");
 
-function saveProject(name, content) {
-  projects[name] = content;
+function getModules(projectName) {
+  return projects[projectName] || {};
+}
+
+function saveModule(project, module, content) {
+  if (!projects[project]) projects[project] = {};
+  projects[project][module] = content;
   localStorage.setItem("vbaber-projects", JSON.stringify(projects));
 }
 
-function loadProject(name) {
-  editor.innerText = projects[name] || "";
-  currentProject = name;
+function loadModule(project, module) {
+  editor.innerText = (projects[project] && projects[project][module]) || "";
+  currentModule = module;
   highlight();
-}
-
-function exportProject() {
-  const blob = new Blob([editor.innerText], {type: "text/plain"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = currentProject + ".bas";
-  link.click();
 }
 
 function updateProjectSelector() {
@@ -45,45 +44,66 @@ function updateProjectSelector() {
   });
 }
 
+function updateModuleSelector() {
+  moduleSelector.innerHTML = "";
+  const modules = getModules(currentProject);
+  Object.keys(modules).forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    if (name === currentModule) opt.selected = true;
+    moduleSelector.appendChild(opt);
+  });
+}
+
+function exportProject() {
+  const content = projects[currentProject][currentModule];
+  const blob = new Blob([content], {type: "text/plain"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${currentModule}.bas`;
+  link.click();
+}
+
+function addModule() {
+  const name = prompt("Nome nuovo modulo:");
+  if (name) {
+    if (!projects[currentProject]) projects[currentProject] = {};
+    projects[currentProject][name] = "";
+    localStorage.setItem("vbaber-projects", JSON.stringify(projects));
+    updateModuleSelector();
+    loadModule(currentProject, name);
+  }
+}
+
 editor.addEventListener("input", () => {
-  saveProject(currentProject, editor.innerText);
+  saveModule(currentProject, currentModule, editor.innerText);
   highlight();
 });
 
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
-}
+moduleSelector.addEventListener("change", () => {
+  saveModule(currentProject, currentModule, editor.innerText);
+  loadModule(currentProject, moduleSelector.value);
+});
 
-function highlight() {
-  let code = escapeHtml(editor.innerText);
-  code = code.replace(/"(.*?)"/g, '<span class="token string">"$1"</span>');
-  code = code.replace(/'(.*)/g, '<span class="token comment">'$1</span>');
-  code = code.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="token number">$1</span>');
-  KEYWORDS.forEach(kw => {
-    const pattern = "\b" + kw.replace(/ /g, "\s+") + "\b";
-    const regex = new RegExp(pattern, "gi");
-    code = code.replace(regex, `<span class="token keyword">${kw}</span>`);
-  });
-  highlighter.innerHTML = code + "<br/>";
-}
+projectSelector.addEventListener("change", () => {
+  saveModule(currentProject, currentModule, editor.innerText);
+  loadModule(projectSelector.value, Object.keys(getModules(projectSelector.value))[0] || "Modulo1");
+  currentProject = projectSelector.value;
+  updateModuleSelector();
+});
 
 themeSelector.addEventListener("change", () => {
   document.body.className = themeSelector.value;
   localStorage.setItem("vbaber-theme", themeSelector.value);
 });
 
-projectSelector.addEventListener("change", () => {
-  saveProject(currentProject, editor.innerText);
-  loadProject(projectSelector.value);
-});
-
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("vbaber-theme") || "light";
-  themeSelector.value = savedTheme;
   document.body.className = savedTheme;
-  if (!projects["Progetto1"]) projects["Progetto1"] = "";
+  themeSelector.value = savedTheme;
+  if (!projects["Progetto1"]) projects["Progetto1"] = { "Modulo1": "" };
   updateProjectSelector();
-  loadProject(currentProject);
+  updateModuleSelector();
+  loadModule(currentProject, currentModule);
 });
