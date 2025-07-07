@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VBAber Web</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>VBAber Web</h1>
+      <select id="themeSelector">
+        <option value="light">Chiaro</option>
+        <option value="dark">Scuro</option>
+      </select>
+      <select id="projectSelector"></select>
+      <button onclick="exportProject()">Esporta</button>
+    </header>
+    <div id="editorContainer">
+      <textarea id="editor" spellcheck="false"></textarea>
+    </div>
+  </div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
