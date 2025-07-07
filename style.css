@@ -11,43 +11,44 @@ body {
   --keyword-color: #0000ff;
   --comment-color: #008000;
   --string-color: #a31515;
+  --number-color: #ff00ff;
 }
 body.dark {
   --bg-color: #121212;
   --text-color: #f0f0f0;
 }
-textarea {
-  width: 100%;
+#editorContainer {
+  position: relative;
   height: 80vh;
+}
+#highlighting, #editor {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
   padding: 1em;
   font-size: 14px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border: none;
-  resize: none;
   font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
 }
-#suggestionBox {
-  position: absolute;
-  z-index: 10;
-  background: white;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-  display: none;
-  font-size: 14px;
+#highlighting {
+  color: transparent;
+  pointer-events: none;
 }
-body.dark #suggestionBox {
-  background: #222;
-  color: #fff;
-}
-.suggestion {
-  padding: 5px;
-  cursor: pointer;
-}
-.suggestion:hover {
-  background: #ddd;
-}
-body.dark .suggestion:hover {
-  background: #444;
+.token.keyword { color: var(--keyword-color); }
+.token.comment { color: var(--comment-color); }
+.token.string  { color: var(--string-color); }
+.token.number  { color: var(--number-color); }
+body.dark #highlighting .token.keyword { color: #6699ff; }
+body.dark #highlighting .token.comment { color: #80c080; }
+body.dark #highlighting .token.string  { color: #ffcc99; }
+body.dark #highlighting .token.number  { color: #ff80ff; }
+#editor {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  caret-color: black;
+  z-index: 1;
 }
