@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 
 const editor = document.getElementById("editor");
 const highlighter = document.getElementById("highlighting");
@@ -160,3 +161,32 @@ editor.addEventListener("input", () => {
   highlight();
   updateProcedureList();
 });
+
+function importModule() {
+  const file = document.getElementById('fileInput').files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const name = file.name.replace(/\.(bas|cls)$/i, "") || "Importato";
+    if (!projects[currentProject]) projects[currentProject] = {};
+    projects[currentProject][name] = reader.result;
+    localStorage.setItem("vbaber-projects", JSON.stringify(projects));
+    updateModuleSelector();
+    loadModule(currentProject, name);
+  };
+  reader.readAsText(file);
+}
+
+function exportAll() {
+  const allModules = projects[currentProject];
+  const zip = new JSZip();
+  Object.entries(allModules).forEach(([name, content]) => {
+    zip.file(name + ".bas", content);
+  });
+  zip.generateAsync({type: "blob"}).then(function(blob) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = currentProject + ".zip";
+    link.click();
+  });
+}

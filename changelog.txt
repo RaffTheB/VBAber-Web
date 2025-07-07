@@ -1,7 +1,11 @@
-VBAber Web v6
+VBAber Web v7
 ======================
-🧭 Navigazione tra Sub e Function
-✔ Analisi automatica del codice per trovare Sub/Function
-✔ Selettore per saltare direttamente alla procedura nel modulo
-✔ Aggiornamento dinamico del menu mentre si scrive
-✔ Tutto offline, senza server
+📁 Importazione file .bas / .cls
+✔ Caricamento moduli direttamente dal file system
+
+📦 Esportazione intero progetto
+✔ Crea uno ZIP con tutti i moduli del progetto corrente
+✔ Ogni modulo salvato con nome e formato .bas
+
+🧭 Mantiene navigazione tra Sub/Function
+🎨 Evidenziazione e temi chiaro/scuro
