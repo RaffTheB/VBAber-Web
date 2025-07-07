@@ -1,14 +1,13 @@
-VBAber Web v10
+VBAber Web v11
 ======================
-🧪 Verifica funzionalità e correzioni bug
-✔ Migliorata stabilità e compatibilità
+🔧 Revisione completa e correzione funzionalità
 
-🌳 Pannello laterale ad albero
-✔ Struttura simile a VBA Microsoft Office
-✔ Navigazione tra progetti e moduli
+✅ Funzioni corrette:
+- Navigazione tra Sub/Function migliorata
+- Parser per blocchi aggiornato e più affidabile
+- ProceduraSelector sincronizzato correttamente
+- Gestione eventi input ottimizzata per iPad
+- Miglior salvataggio moduli/progetti
+- Prevenzione bug su input, tastiera e nomi moduli
 
-📱 Ottimizzazione per iPad Pro
-✔ UI adattiva e touch-friendly
-✔ Font e layout migliorati per schermi grandi
-
-✅ Include tutte le funzioni delle versioni precedenti
+🔁 Progetto più stabile e pronto per test reali

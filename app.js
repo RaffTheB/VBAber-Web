@@ -283,3 +283,53 @@ function updateProjectTree() {
 window.addEventListener("load", () => {
   updateProjectTree();
 });
+
+function updateProcedureList() {
+  const code = editor.innerText;
+  const lines = code.split('\n');
+  const procedures = [];
+  const regex = /^\s*(Sub|Function)\s+(\w+)/i;
+
+  lines.forEach((line, idx) => {
+    const match = line.match(regex);
+    if (match) {
+      procedures.push({ name: match[2], line: idx });
+    }
+  });
+
+  const selector = document.getElementById("procedureSelector");
+  selector.innerHTML = '<option value="">Vai a Sub/Function</option>';
+  procedures.forEach(proc => {
+    const opt = document.createElement("option");
+    opt.textContent = proc.name;
+    opt.value = proc.line;
+    selector.appendChild(opt);
+  });
+}
+
+function goToProcedure() {
+  const selector = document.getElementById("procedureSelector");
+  const line = parseInt(selector.value);
+  if (!isNaN(line)) {
+    const lines = editor.innerText.split("\n");
+    const pos = lines.slice(0, line).join("\n").length;
+    const range = document.createRange();
+    const sel = window.getSelection();
+    editor.focus();
+    range.setStart(editor.firstChild || editor, pos);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+}
+
+// Migliora salvataggio sincronizzato
+editor.addEventListener("input", () => {
+  if (currentProject && currentModule) {
+    saveModule(currentProject, currentModule, editor.innerText);
+    highlight();
+    updateProcedureList();
+    checkBlockCoherence();
+    updateProjectTree();
+  }
+});
