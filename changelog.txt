@@ -1,11 +1,14 @@
-VBAber Web v7
+VBAber Web v8
 ======================
-📁 Importazione file .bas / .cls
-✔ Caricamento moduli direttamente dal file system
+🧠 Parser logico VBA
+✔ Controllo automatico di coerenza per:
+  - If / End If
+  - For / Next
+  - While / Wend
+  - Do / Loop
+  - Select Case / End Select
+  - With / End With
+✔ Avvisi in tempo reale sopra l'editor
+✔ Indicazione visiva di errori o assenza di errori
 
-📦 Esportazione intero progetto
-✔ Crea uno ZIP con tutti i moduli del progetto corrente
-✔ Ogni modulo salvato con nome e formato .bas
-
-🧭 Mantiene navigazione tra Sub/Function
-🎨 Evidenziazione e temi chiaro/scuro
+✅ Mantiene tutte le funzioni delle versioni precedenti

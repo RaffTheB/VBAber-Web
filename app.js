@@ -190,3 +190,70 @@ function exportAll() {
     link.click();
   });
 }
+
+function checkBlockCoherence() {
+  const code = editor.innerText;
+  const lines = code.split('\n');
+  const stack = [];
+  const errors = [];
+
+  const pairs = {
+    "If": "End If",
+    "For": "Next",
+    "While": "Wend",
+    "Do": "Loop",
+    "Select Case": "End Select",
+    "With": "End With"
+  };
+
+  const openers = Object.keys(pairs);
+  const closers = Object.values(pairs);
+
+  lines.forEach((line, idx) => {
+    const trimmed = line.trim();
+    for (let open of openers) {
+      if (trimmed.match(new RegExp(`^${open}\b`, "i"))) {
+        stack.push({ type: open, line: idx + 1 });
+      }
+    }
+    for (let close of closers) {
+      if (trimmed.match(new RegExp(`^${close}\b`, "i"))) {
+        const expectedOpen = openers[closers.indexOf(close)];
+        const last = stack.pop();
+        if (!last || last.type !== expectedOpen) {
+          errors.push(`Errore a riga ${idx + 1}: '${close}' senza '${expectedOpen}' corrispondente.`);
+        }
+      }
+    }
+  });
+
+  stack.forEach(unclosed => {
+    errors.push(`Blocco '${unclosed.type}' aperto a riga ${unclosed.line} non chiuso.`);
+  });
+
+  showBlockErrors(errors);
+}
+
+function showBlockErrors(errors) {
+  let msg = document.getElementById("blockErrors");
+  if (!msg) {
+    msg = document.createElement("div");
+    msg.id = "blockErrors";
+    msg.style = "padding:0.5em; font-family:monospace; font-size:0.9em;";
+    document.body.insertBefore(msg, document.getElementById("app"));
+  }
+  if (errors.length > 0) {
+    msg.innerHTML = "<strong>⚠️ Errori di struttura:</strong><br>" + errors.join("<br>");
+    msg.style.color = "red";
+  } else {
+    msg.innerHTML = "<strong>✅ Nessun errore di struttura nei blocchi</strong>";
+    msg.style.color = "green";
+  }
+}
+
+editor.addEventListener("input", () => {
+  saveModule(currentProject, currentModule, editor.innerText);
+  highlight();
+  updateProcedureList();
+  checkBlockCoherence();
+});
