@@ -1,10 +1,14 @@
-VBAber Web v9
+VBAber Web v10
 ======================
-🎨 Restyling grafico completo
-✔ Tema moderno ispirato a Microsoft Office
-✔ Font professionale e leggibile (Consolas, Segoe UI)
-✔ Pulsanti, dropdown e layout più eleganti
-✔ Tema chiaro e scuro migliorati
-✔ Più spazio visivo per il codice
+🧪 Verifica funzionalità e correzioni bug
+✔ Migliorata stabilità e compatibilità
 
-✅ Nessuna funzione rimossa rispetto alla v8
+🌳 Pannello laterale ad albero
+✔ Struttura simile a VBA Microsoft Office
+✔ Navigazione tra progetti e moduli
+
+📱 Ottimizzazione per iPad Pro
+✔ UI adattiva e touch-friendly
+✔ Font e layout migliorati per schermi grandi
+
+✅ Include tutte le funzioni delle versioni precedenti

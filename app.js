@@ -257,3 +257,29 @@ editor.addEventListener("input", () => {
   updateProcedureList();
   checkBlockCoherence();
 });
+
+function updateProjectTree() {
+  const tree = document.getElementById("projectTree");
+  tree.innerHTML = "";
+  Object.keys(projects).forEach(project => {
+    const projLi = document.createElement("li");
+    projLi.textContent = project;
+    const modUl = document.createElement("ul");
+    Object.keys(projects[project]).forEach(mod => {
+      const modLi = document.createElement("li");
+      modLi.style.marginLeft = "1em";
+      modLi.textContent = mod;
+      modLi.onclick = () => {
+        currentProject = project;
+        loadModule(project, mod);
+      };
+      modUl.appendChild(modLi);
+    });
+    projLi.appendChild(modUl);
+    tree.appendChild(projLi);
+  });
+}
+
+window.addEventListener("load", () => {
+  updateProjectTree();
+});

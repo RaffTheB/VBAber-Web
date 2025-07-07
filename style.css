@@ -1,10 +1,9 @@
 
 body {
   margin: 0;
+  display: flex;
+  height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
 }
 
 body.light {
@@ -25,6 +24,39 @@ body.dark {
   --button-bg: #333;
 }
 
+#treeSidebar {
+  width: 220px;
+  background-color: var(--editor-bg);
+  border-right: 1px solid var(--editor-border);
+  padding: 1em;
+  overflow-y: auto;
+}
+
+#treeSidebar h2 {
+  margin-top: 0;
+  font-size: 1em;
+  color: var(--accent);
+}
+
+#projectTree {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.9em;
+}
+
+#projectTree li {
+  margin: 4px 0;
+  cursor: pointer;
+}
+
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
 header {
   display: flex;
   flex-wrap: wrap;
@@ -36,28 +68,12 @@ header {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.2em;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-header select, header button {
-  padding: 0.3em 0.6em;
-  font-size: 0.9em;
-  background-color: var(--button-bg);
-  color: var(--text);
-  border: 1px solid var(--editor-border);
-  border-radius: 4px;
-}
-
 #editorContainer {
+  padding: 1em;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  max-width: 100%;
-  box-sizing: border-box;
+  overflow: auto;
 }
 
 #highlighting, #editor {
@@ -84,12 +100,4 @@ header select, header button {
   position: relative;
   z-index: 1;
   color: var(--text);
-}
-
-#blockErrors {
-  padding: 0.5em 1em;
-  font-family: Consolas, monospace;
-  font-size: 0.9em;
-  background-color: #fff8dc;
-  border-bottom: 1px solid #ccc;
 }

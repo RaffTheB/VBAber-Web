@@ -7,7 +7,11 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="light">
+  <div id="treeSidebar">
+    <h2>Progetti</h2>
+    <ul id="projectTree"></ul>
+  </div>
   <div id="app">
     <header>
       <h1>VBAber Web</h1>
@@ -15,8 +19,6 @@
         <option value="light">Chiaro</option>
         <option value="dark">Scuro</option>
       </select>
-      <select id="projectSelector"></select>
-      <select id="moduleSelector"></select>
       <button onclick="addModule()">+ Modulo</button>
       <button onclick="exportProject()">Esporta Modulo</button>
       <button onclick="exportAll()">Esporta Tutto</button>
@@ -31,6 +33,7 @@
       <div id="editor" contenteditable="true" spellcheck="false"></div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
