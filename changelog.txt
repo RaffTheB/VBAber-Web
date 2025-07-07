@@ -1,7 +1,7 @@
-VBAber Web v5
+VBAber Web v6
 ======================
-✔ Moduli multipli per progetto (supporto per più .bas/.cls)
-✔ Selezione e creazione moduli da menu a tendina
-✔ Salvataggio automatico per modulo
-✔ Esportazione singolo modulo
-✔ Mantiene evidenziazione sintattica avanzata
+🧭 Navigazione tra Sub e Function
+✔ Analisi automatica del codice per trovare Sub/Function
+✔ Selettore per saltare direttamente alla procedura nel modulo
+✔ Aggiornamento dinamico del menu mentre si scrive
+✔ Tutto offline, senza server

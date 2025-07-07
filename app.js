@@ -107,3 +107,56 @@ window.addEventListener("DOMContentLoaded", () => {
   updateModuleSelector();
   loadModule(currentProject, currentModule);
 });
+
+function updateProcedureList() {
+  const code = editor.innerText;
+  const lines = code.split("\n");
+  const procedures = [];
+  lines.forEach((line, idx) => {
+    const match = line.match(/\b(Sub|Function)\s+(\w+)/i);
+    if (match) {
+      procedures.push({ name: match[2], line: idx });
+    }
+  });
+  const procSel = document.getElementById("procedureSelector");
+  procSel.innerHTML = '<option value="">Vai a Sub/Function</option>';
+  procedures.forEach(proc => {
+    const opt = document.createElement("option");
+    opt.value = proc.line;
+    opt.textContent = proc.name;
+    procSel.appendChild(opt);
+  });
+}
+
+function goToProcedure() {
+  const line = parseInt(document.getElementById("procedureSelector").value);
+  if (!isNaN(line)) {
+    const range = document.createRange();
+    const sel = window.getSelection();
+    const lines = editor.childNodes;
+    let charCount = 0, currentLine = 0;
+    for (let node of editor.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const nodeLines = node.textContent.split("\n");
+        for (let i = 0; i < nodeLines.length; i++) {
+          if (currentLine === line) {
+            range.setStart(node, charCount);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            editor.focus();
+            return;
+          }
+          currentLine++;
+          charCount += nodeLines[i].length + 1;
+        }
+      }
+    }
+  }
+}
+
+editor.addEventListener("input", () => {
+  saveModule(currentProject, currentModule, editor.innerText);
+  highlight();
+  updateProcedureList();
+});

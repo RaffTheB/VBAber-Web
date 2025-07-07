@@ -19,6 +19,9 @@
       <select id="moduleSelector"></select>
       <button onclick="addModule()">+ Modulo</button>
       <button onclick="exportProject()">Esporta</button>
+      <select id="procedureSelector" onchange="goToProcedure()">
+        <option value="">Vai a Sub/Function</option>
+      </select>
     </header>
     <div id="editorContainer">
       <pre id="highlighting"></pre>
