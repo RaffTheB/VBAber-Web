@@ -1,10 +1,8 @@
-VBAber Web v12
+VBAber Web v13
 ======================
-🎯 Correzioni fondamentali per usabilità reale
-
-🌓 Tema scuro e chiaro funzionanti
-🎨 Colorazione sintattica: parole chiave, stringhe, commenti
-⛔ Correttore ortografico disattivato
-📝 Tasto TAB: ora inserisce indentazione
-🔄 Sincronizzazione tra editor e contenuto visivo
-🧩 Blocchi di codice preferiti salvabili
+🧠 IntelliSense base attivo:
+  - Suggerimenti automatici per parole chiave VBA
+  - Completamento intelligente per parole parziali
+🧩 Snippet automatici (Tab funziona correttamente)
+🎨 Colorazione migliorata
+🧼 UI più chiara per i blocchi di codice salvati

@@ -18,6 +18,7 @@ function highlight() {
 
 editor.addEventListener("input", () => {
   highlight();
+  showAutocomplete();
 });
 
 editor.addEventListener("keydown", function(e) {
@@ -33,3 +34,37 @@ editor.addEventListener("keydown", function(e) {
     sel.addRange(range);
   }
 });
+
+const autocompleteWords = ["Dim", "If", "Then", "Else", "End", "Sub", "Function", "For", "Next", "Do", "Loop", "While", "Wend"];
+
+function showAutocomplete() {
+  const text = editor.innerText;
+  const lastWord = text.split(/\s+/).pop().toLowerCase();
+  const matches = autocompleteWords.filter(word => word.toLowerCase().startsWith(lastWord));
+
+  const list = document.getElementById("autocomplete-list");
+  list.innerHTML = "";
+  if (matches.length === 0 || lastWord.length === 0) {
+    list.style.display = "none";
+    return;
+  }
+
+  matches.forEach(match => {
+    const li = document.createElement("li");
+    li.textContent = match;
+    li.onclick = () => insertAutocomplete(match);
+    list.appendChild(li);
+  });
+
+  list.style.display = "block";
+}
+
+function insertAutocomplete(word) {
+  const text = editor.innerText;
+  const words = text.split(/\s+/);
+  words.pop();
+  words.push(word);
+  editor.innerText = words.join(" ") + " ";
+  highlight();
+  document.getElementById("autocomplete-list").style.display = "none";
+}
