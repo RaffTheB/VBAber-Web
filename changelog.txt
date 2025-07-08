@@ -1,13 +1,10 @@
-VBAber Web v11
+VBAber Web v12
 ======================
-🔧 Revisione completa e correzione funzionalità
+🎯 Correzioni fondamentali per usabilità reale
 
-✅ Funzioni corrette:
-- Navigazione tra Sub/Function migliorata
-- Parser per blocchi aggiornato e più affidabile
-- ProceduraSelector sincronizzato correttamente
-- Gestione eventi input ottimizzata per iPad
-- Miglior salvataggio moduli/progetti
-- Prevenzione bug su input, tastiera e nomi moduli
-
-🔁 Progetto più stabile e pronto per test reali
+🌓 Tema scuro e chiaro funzionanti
+🎨 Colorazione sintattica: parole chiave, stringhe, commenti
+⛔ Correttore ortografico disattivato
+📝 Tasto TAB: ora inserisce indentazione
+🔄 Sincronizzazione tra editor e contenuto visivo
+🧩 Blocchi di codice preferiti salvabili

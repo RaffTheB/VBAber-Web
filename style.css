@@ -13,6 +13,9 @@ body.light {
   --editor-bg: #ffffff;
   --editor-border: #ccc;
   --button-bg: #e6e6e6;
+  --keyword: #0000FF;
+  --string: #A31515;
+  --comment: #008000;
 }
 
 body.dark {
@@ -22,6 +25,9 @@ body.dark {
   --editor-bg: #252526;
   --editor-border: #3c3c3c;
   --button-bg: #333;
+  --keyword: #569CD6;
+  --string: #CE9178;
+  --comment: #6A9955;
 }
 
 #treeSidebar {
@@ -32,21 +38,10 @@ body.dark {
   overflow-y: auto;
 }
 
-#treeSidebar h2 {
-  margin-top: 0;
-  font-size: 1em;
-  color: var(--accent);
-}
-
 #projectTree {
   list-style: none;
   padding-left: 0;
   font-size: 0.9em;
-}
-
-#projectTree li {
-  margin: 4px 0;
-  cursor: pointer;
 }
 
 #app {
@@ -65,7 +60,6 @@ header {
   padding: 0.5em 1em;
   background-color: var(--editor-bg);
   border-bottom: 1px solid var(--editor-border);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 #editorContainer {
@@ -74,6 +68,7 @@ header {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  position: relative;
 }
 
 #highlighting, #editor {
@@ -85,16 +80,24 @@ header {
   padding: 1em;
   border: 1px solid var(--editor-border);
   border-radius: 4px;
-  min-height: 300px;
   background-color: var(--editor-bg);
   overflow: auto;
+  min-height: 400px;
 }
 
 #highlighting {
-  position: absolute;
   color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
 }
+
+#highlighting-content .keyword { color: var(--keyword); }
+#highlighting-content .string { color: var(--string); }
+#highlighting-content .comment { color: var(--comment); }
 
 #editor {
   position: relative;

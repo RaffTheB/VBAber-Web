@@ -15,7 +15,7 @@
   <div id="app">
     <header>
       <h1>VBAber Web</h1>
-      <select id="themeSelector">
+      <select id="themeSelector" onchange="switchTheme()">
         <option value="light">Chiaro</option>
         <option value="dark">Scuro</option>
       </select>
@@ -29,11 +29,10 @@
       </select>
     </header>
     <div id="editorContainer">
-      <pre id="highlighting"></pre>
+      <pre id="highlighting" aria-hidden="true"><code class="language-vba" id="highlighting-content"></code></pre>
       <div id="editor" contenteditable="true" spellcheck="false"></div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
